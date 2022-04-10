@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>로그인</title>
+</head>
+<body>
+<header>
+    <nav>
+        <a th:href="#">Home</a>
+        <a th:href="@{/member/login}">Sign in</a>
+        <a href="#">Profile</a>
+        <a href="#">Programs</a>
+    </nav>
+</header>
+<section>
+    <h1>로그인</h1>
+    <form method="post" action="../index.html">
+        <input type="text" placeholder="아이디">아이디
+        <input type="password" placeholder="비밀번호">비밀번호
+        <input type="submit" value="로그인">
+    </form>
+    <a href="@{/member}">회원가입</a>
+</section>
+</body>
+</html>
