@@ -11,8 +11,11 @@ public class hyeokController {
         return "/index.html";
     }
 
-    @GetMapping("/login")
+    @GetMapping("/member/login")
     public String login() {
-        return "/login.html";
+        return "/member/login.html";
     }
+    
+    @GetMapping("/member/signup")
+    public String signup() { return "/member/signup.html";}
 }
