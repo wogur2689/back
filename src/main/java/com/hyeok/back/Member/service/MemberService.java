@@ -19,9 +19,6 @@ public class MemberService {
             return;
         }
 
-        BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
-        memberDto.setPassword(passwordEncoder.encode(memberDto.getPassword()));
-
         MemberEntity memberEntity = MemberEntity.builder()
                 .id(member.getId())
                 .userID(member.getUserID())

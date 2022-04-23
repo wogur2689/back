@@ -7,7 +7,7 @@
 <body>
 <header>
     <nav>
-        <a th:href="#">Home</a>
+        <a href="#">Home</a>
         <a th:href="@{/member/login}">Log In</a>
         <a href="#">Profile</a>
         <a href="#">Programs</a>
@@ -15,12 +15,12 @@
 </header>
 <section>
     <h1>로그인</h1>
-    <form method="post" action="../index.html">
+    <form method="post" action="#">
         <input type="text" placeholder="아이디">아이디
         <input type="password" placeholder="비밀번호">비밀번호
         <input type="submit" value="로그인">
     </form>
-    <a href="@{/member/signup}">Sign Up</a>
+    <a th:href="@{/member/signup}">Sign Up</a>
 </section>
 </body>
 </html>
