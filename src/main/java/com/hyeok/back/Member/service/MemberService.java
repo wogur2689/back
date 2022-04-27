@@ -6,6 +6,8 @@ import com.hyeok.back.Member.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.*;
+
 @Service
 @RequiredArgsConstructor
 public class MemberService {
@@ -13,7 +15,7 @@ public class MemberService {
     private MemberRepository memberRepository;
 
     /* 회원가입 */
-    public void savejoin(Member member) {
+    public void saveJoin(Member member) {
         /* userID 중복체크 */
         if(memberRepository.findById(member.getId()).isPresent()) {
             return;
@@ -26,5 +28,12 @@ public class MemberService {
                 .password(member.getPassword())
                 .build();
         memberRepository.save(memberEntity);
+    }
+
+    /* 로그인 */
+    public Boolean selectJoin(Member member) {
+        Boolean result = memberRepository.findByUserIdAndPassword(member.getUserID(), member.getPassword());
+        if(result) return true;
+        else return false;
     }
 }

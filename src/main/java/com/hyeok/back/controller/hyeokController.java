@@ -20,19 +20,25 @@ public class hyeokController {
     }
 
     //로그인 페이지
-   @GetMapping("/member/login")
-   public String login() {
+    @GetMapping("/member/login")
+    public String login() {
         return "/member/login";
+    }
+
+    @PostMapping("/member/login")
+    public String memberLogin(Member member) {
+        Boolean result = memberService.selectJoin(member);
+        if(result) return "redirect:/";
+        else return "/member/loginError";
     }
 
     //회원가입 페이지
     @GetMapping("/member/signup")
     public String signup() { return "/member/signup";}
 
-    /*@PostMapping("/member/signup")
+    @PostMapping("/member/signup")
     public String memberJoin(Member member) {
-        memberService.savejoin(member);
-
+        memberService.saveJoin(member);
         return "redirect:/";
-    }*/
+    }
 }
