@@ -23,7 +23,7 @@ public class MemberService {
 
         MemberEntity memberEntity = MemberEntity.builder()
                 .id(member.getId())
-                .userID(member.getUserID())
+                .userId(member.getUserId())
                 .name(member.getName())
                 .password(member.getPassword())
                 .build();
@@ -32,7 +32,7 @@ public class MemberService {
 
     /* 로그인 */
     public Boolean selectJoin(Member member) {
-        Boolean result = memberRepository.findByUserIdAndPassword(member.getUserID(), member.getPassword());
+        Boolean result = memberRepository.findByUserIdAndPassword(member.getUserId(), member.getPassword());
         if(result) return true;
         else return false;
     }

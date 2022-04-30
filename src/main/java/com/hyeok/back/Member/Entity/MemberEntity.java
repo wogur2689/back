@@ -17,7 +17,7 @@ public class MemberEntity {
     private Long id;
 
     @Column(name = "user_id")
-    private String userID;
+    private String userId;
 
     @Column(name = "name")
     private String name;
@@ -34,9 +34,9 @@ public class MemberEntity {
     }
 
     @Builder
-    public MemberEntity(Long id, String userID, String name, String password, String verify_password) {
+    public MemberEntity(Long id, String userId, String name, String password, String verify_password) {
         this.id = id;
-        this.userID = userID;
+        this.userId = userId;
         this.name = name;
         this.password = password;
         this.verify_password = verify_password;
