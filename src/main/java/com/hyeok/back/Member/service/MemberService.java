@@ -1,33 +1,24 @@
 package com.hyeok.back.Member.service;
 
-import com.hyeok.back.Member.Entity.MemberEntity;
 import com.hyeok.back.Member.dto.Member;
 import com.hyeok.back.Member.repository.MemberRepository;
+import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
-import java.util.*;
-
+@Slf4j
 @Service
-@RequiredArgsConstructor
+@AllArgsConstructor
 public class MemberService {
 
     private MemberRepository memberRepository;
 
     /* 회원가입 */
     public void saveJoin(Member member) {
-        /* userID 중복체크 */
-        if(memberRepository.findById(member.getId()).isPresent()) {
-            return;
-        }
-
-        MemberEntity memberEntity = MemberEntity.builder()
-                .id(member.getId())
-                .userId(member.getUserId())
-                .name(member.getName())
-                .password(member.getPassword())
-                .build();
-        memberRepository.save(memberEntity);
+        log.info("저장 시작");
+        memberRepository.save(member.toEntity());
+        log.info("저장 완료");
     }
 
     /* 로그인 */
