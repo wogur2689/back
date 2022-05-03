@@ -3,7 +3,9 @@ package com.hyeok.back.Member.dto;
 import com.hyeok.back.Member.Entity.MemberEntity;
 import lombok.Builder;
 import lombok.Getter;
+import lombok.Setter;
 
+@Setter
 @Getter
 public class Member {
     private Long id;         //아이디
