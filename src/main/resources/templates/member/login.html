@@ -15,9 +15,9 @@
 </header>
 <section>
     <h1>로그인</h1>
-    <form method="post" action="#">
-        <input type="text" placeholder="아이디">아이디
-        <input type="password" placeholder="비밀번호">비밀번호
+    <form method="post" action="/member/login">
+        <input type="text" name="userId" placeholder="아이디">아이디<br>
+        <input type="password" password="password" placeholder="비밀번호">비밀번호
         <input type="submit" value="로그인">
     </form>
     <a th:href="@{/member/signup}">Sign Up</a>
