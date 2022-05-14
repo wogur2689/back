@@ -7,6 +7,7 @@ import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 //import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -26,6 +27,7 @@ public class MemberService {
 
 
     /* 회원가입 */
+    @Transactional
     public void saveJoin(Member member) {
         //member.setPassword(encryption(member.getPassword()));
         memberRepository.save(member.toEntity());
