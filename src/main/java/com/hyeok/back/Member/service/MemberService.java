@@ -20,11 +20,11 @@ public class MemberService {
     private MemberRepository memberRepository;
 
     /* 비밀번호 암호화 */
-   //public String encryption(String password) {
-        //BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder(); //비밀번호 암호화
-        //return passwordEncoder.encode(password);
-    //}
-
+    /*@Transactional
+    public String encryption(String password) {
+        BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder(); //비밀번호 암호화
+        return passwordEncoder.encode(password);
+    }*/
 
     /* 회원가입 */
     @Transactional
@@ -34,24 +34,21 @@ public class MemberService {
     }
 
     /* 로그인 */
+    @Transactional
     public Boolean selectJoin(String id, String pw) {
-        List<MemberEntity> result = memberRepository.findAll();
-        //member.setPassword(encryption(member.getPassword()));
+        List<MemberEntity> result = selectMember();
         for(MemberEntity memberEntity : result) {
             if(memberEntity.getUserId().equals(id)) {
-                if (memberEntity.getPassword().equals(pw)) {
-                    log.info("login success");
-                    return true;
-                } else {
-                    log.info("비밀번호가 틀렸습니다.");
-                    return false;
-                }
-            } else {
-                log.info("존재하지 않는 아이디입니다.");
-                return false;
+                if (memberEntity.getPassword().equals(pw)) return true;
+                else return false; //비밀번호 불일치
             }
         }
-        log.info("login fail");
-        return false;
+        return false; //id 없음.
+    }
+
+    /* 전체 멤버 조회 */
+    @Transactional(readOnly = true)
+    public List<MemberEntity> selectMember() {
+        return memberRepository.findAll();
     }
 }
