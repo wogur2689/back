@@ -29,11 +29,10 @@ public class hyeokController {
 
     @PostMapping("/member/login")
     public String memberLogin(String userId, String password) {
-        log.info("입력한 비밀번호 : " + password);
-        //Boolean result = memberService.selectJoin(member);
-        //if(result)
+        Boolean result = memberService.selectJoin(userId, password);
+        if(result)
         return "redirect:/";
-        //else return "/member/loginError";
+        else return "/member/loginError";
     }
 
     //회원가입 페이지

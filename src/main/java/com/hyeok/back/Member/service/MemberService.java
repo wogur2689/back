@@ -34,18 +34,15 @@ public class MemberService {
     }
 
     /* 로그인 */
-    public Boolean selectJoin(Member member) {
-        log.info("입력한 비밀번호 : " + member.getPassword());
-        List<MemberEntity> result = memberRepository.findAll(); //findByUserIdAndPassword(member.getUserId(), member.getPassword());
+    public Boolean selectJoin(String id, String pw) {
+        List<MemberEntity> result = memberRepository.findAll();
         //member.setPassword(encryption(member.getPassword()));
         for(MemberEntity memberEntity : result) {
-            if(memberEntity.getUserId().equals(member.getUserId())) {
-                if (memberEntity.getPassword().equals(member.getPassword())) {
+            if(memberEntity.getUserId().equals(id)) {
+                if (memberEntity.getPassword().equals(pw)) {
                     log.info("login success");
                     return true;
                 } else {
-                    log.info("저장된 비밀번호 : " + memberEntity.getPassword());
-                    log.info("입력한 비밀번호 : " + member.getPassword());
                     log.info("비밀번호가 틀렸습니다.");
                     return false;
                 }
