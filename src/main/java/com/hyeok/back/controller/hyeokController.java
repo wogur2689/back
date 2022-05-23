@@ -30,7 +30,7 @@ public class hyeokController {
     @PostMapping("/member/login")
     public String memberLogin(String userId, String password) {
         Boolean result = memberService.selectJoin(userId, password);
-        if(result) return "redirect:/";
+        if(result) return "redirect:/index.html";
         else return "/member/loginError";
     }
 
