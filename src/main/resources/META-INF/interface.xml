@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<entity-mappings
+        xmlns="http://java.sun.com/xml/ns/persistence/orm"
+        version="2.0">
+
+    <!-- 로그인 -->
+    <named-native-query name="interface.login" result-class="com.hyeok.back.Member.Entity.MemberEntity">
+        <query>
+            select *
+            from member
+            where user_id = :user_id
+              AND password = :password
+        </query>
+    </named-native-query>
+
+</entity-mappings>
