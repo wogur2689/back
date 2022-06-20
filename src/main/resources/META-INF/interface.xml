@@ -9,7 +9,6 @@
             select *
             from member
             where user_id = :user_id
-              AND password = :password
         </query>
     </named-native-query>
 

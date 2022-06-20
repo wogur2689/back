@@ -3,13 +3,11 @@ package com.hyeok.back.Member.service;
 import com.hyeok.back.Member.Entity.MemberEntity;
 import com.hyeok.back.Member.dto.Member;
 import com.hyeok.back.Member.repository.MemberRepository;
-import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -41,20 +39,25 @@ public class MemberService implements UserDetailsService {
     /* 로그인 */
     @Transactional
     public Boolean selectJoin(String id, String pw) {
-        List<MemberEntity> result = selectMember();
-        for(MemberEntity memberEntity : result) {
-            if(memberEntity.getUserId().equals(id)) {
-                if (passwordEncoder.matches(pw, memberEntity.getPassword())) return true;
-                else return false; //비밀번호 불일치
-            }
+        MemberEntity result = selectMember(id);
+
+        //id 조회
+        if(!result.getUserId().equals(id)) {
+            return false;
         }
-        return false; //id 없음.
+
+        //pw 조회
+        if (!passwordEncoder.matches(pw, result.getPassword())) {
+             return false; //비밀번호 불일치
+        }
+
+        return true; //id 없음.
     }
 
     /* 전체 멤버 조회 */
     @Transactional(readOnly = true)
-    public List<MemberEntity> selectMember() {
-        return memberRepository.findAll();
+    public MemberEntity selectMember(String id) {
+        return memberRepository.findByUserId(id);
     }
 
     @Override
