@@ -15,10 +15,9 @@ import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 @Configuration
 @EnableWebSecurity
-@AllArgsConstructor
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
-    private MemberService memberService;
+    //private MemberService memberService;
 
     @Bean
     public PasswordEncoder passwordEncoder() {
@@ -53,8 +52,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 //.exceptionHandling().accessDeniedPage("/user/denied");
     }
 
-    @Override
+    /*@Override
     public void configure(AuthenticationManagerBuilder auth) throws Exception {
       auth.userDetailsService(memberService).passwordEncoder(passwordEncoder());
-    }
+    }*/
 }

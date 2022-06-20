@@ -5,10 +5,12 @@ import com.hyeok.back.Member.dto.Member;
 import com.hyeok.back.Member.repository.MemberRepository;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -17,14 +19,15 @@ import java.util.List;
 
 @Slf4j
 @Service
-@AllArgsConstructor
 public class MemberService implements UserDetailsService {
 
+    @Autowired
     private MemberRepository memberRepository;
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
     /* 비밀번호 암호화 */
     public String encryption(String password) {
-        BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder(); //비밀번호 암호화
         return passwordEncoder.encode(password);
     }
 
@@ -39,10 +42,9 @@ public class MemberService implements UserDetailsService {
     @Transactional
     public Boolean selectJoin(String id, String pw) {
         List<MemberEntity> result = selectMember();
-        log.info("비밀번호 : " + encryption(pw));
         for(MemberEntity memberEntity : result) {
             if(memberEntity.getUserId().equals(id)) {
-                if (memberEntity.getPassword().equals(encryption(pw))) return true;
+                if (passwordEncoder.matches(pw, memberEntity.getPassword())) return true;
                 else return false; //비밀번호 불일치
             }
         }
