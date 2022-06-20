@@ -6,7 +6,6 @@ import com.hyeok.back.Member.repository.MemberRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -14,7 +13,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 @Slf4j
 @Service
-public class MemberService implements UserDetailsService {
+public class MemberService {
 
     @Autowired
     private MemberRepository memberRepository;
@@ -51,14 +50,9 @@ public class MemberService implements UserDetailsService {
         return true; //id 없음.
     }
 
-    /* 전체 멤버 조회 */
+    /* 입력한 ID로 조회 */
     @Transactional(readOnly = true)
     public MemberEntity selectMember(String id) {
         return memberRepository.findByUserId(id);
-    }
-
-    @Override
-    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        return null;
     }
 }
