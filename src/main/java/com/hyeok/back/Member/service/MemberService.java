@@ -23,7 +23,6 @@ public class MemberService implements UserDetailsService {
     private MemberRepository memberRepository;
 
     /* 비밀번호 암호화 */
-    @Transactional
     public String encryption(String password) {
         BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder(); //비밀번호 암호화
         return passwordEncoder.encode(password);
@@ -40,6 +39,7 @@ public class MemberService implements UserDetailsService {
     @Transactional
     public Boolean selectJoin(String id, String pw) {
         List<MemberEntity> result = selectMember();
+        log.info("비밀번호 : " + encryption(pw));
         for(MemberEntity memberEntity : result) {
             if(memberEntity.getUserId().equals(id)) {
                 if (memberEntity.getPassword().equals(encryption(pw))) return true;
