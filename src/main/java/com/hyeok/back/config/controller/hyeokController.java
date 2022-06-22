@@ -1,4 +1,4 @@
-package com.hyeok.back.controller;
+package com.hyeok.back.config.controller;
 
 import com.hyeok.back.Member.dto.Member;
 import com.hyeok.back.Member.service.MemberService;
@@ -42,6 +42,6 @@ public class hyeokController {
     @PostMapping("/member/signup")
     public String memberJoin(Member member) {
         memberService.saveJoin(member);
-        return "index.html";
+        return "redirect:/";
     }
 }

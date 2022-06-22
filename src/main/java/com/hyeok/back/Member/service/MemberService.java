@@ -39,7 +39,7 @@ public class MemberService {
 
         //id 조회
         if(!result.getUserId().equals(id)) {
-            return false;
+            return false; //id 없음.
         }
 
         //pw 조회
@@ -47,7 +47,7 @@ public class MemberService {
              return false; //비밀번호 불일치
         }
 
-        return true; //id 없음.
+        return true; //로그인 성공
     }
 
     /* 입력한 ID로 조회 */
