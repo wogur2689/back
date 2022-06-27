@@ -1,4 +1,4 @@
-package com.hyeok.back.config.controller;
+package com.hyeok.back.controller;
 
 import com.hyeok.back.Member.dto.Member;
 import com.hyeok.back.Member.service.MemberService;
