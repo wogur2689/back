@@ -1,0 +1,18 @@
+@charset "UTF-8";
+/* 레이아웃 */
+#header { height: 325px; /*background: url(../img/header_bg.jpg) center top repeat-x;*/ }
+#footer { border-top: 1px solid #eee;}
+
+/* 컨텐츠 레이아웃 */
+#cont_nav {background-color: #f6fdff;}
+#cont_tit {background-color: #EAF7FE;}
+#cont_ban {background-color: #dceff7;}
+#cont_cont {background-color: #f6fdff;}
+
+/* 헤더 */
+header .header-menu {text-align: right;}
+header .header-menu a {color: #fff; padding: 10px 0px 10px 13px; display: inline-block;}
+header .header-menu a:hover {color: #666;}
+
+/* */
+nav {overflow: hidden; padding: 30px 0;}

@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html lang="ko" xmlns:th="http://www.w3.org/1999/xhtml">
-<head>
-    <meta charset="UTF-8">
-    <link th:href="@{/css/home.css}" rel="stylesheet">
-    <link th:href="@{/css/reset.css}" rel="stylesheet">
-    <title>메인화면</title>
-</head>
+    <head>
+        <meta charset="UTF-8">
+        <link th:href="@{/css/index.css}" rel="stylesheet">
+        <link th:href="@{/css/reset.css}" rel="stylesheet">
+        <title>메인화면</title>
+    </head>
 <body>
 <header>
     <nav>
@@ -16,5 +16,27 @@
     </nav>
 </header>
 <h1>저의 홈페이지에 오신것을 환영합니다~</h1>
+<div id="wrap">
+    <header>
+        <nav>
+            <a href="#">Home</a>
+            <a th:href="@{/member/login}">Log In</a>
+            <a href="#">Profile</a>
+            <a href="#">Programs</a>
+        </nav>
+    </header>
+    <div id="contents">
+        <div id="cont_tit">
+            <h1>저의 홈페이지에 오신것을 환영합니다~</h1>
+        </div>
+        <div id="cont_ban">
+            <h1>배너</h1>
+        </div>
+        <div id="cont_cont">
+            <h1>컨텐츠</h1>
+        </div>
+    </div>
+    <div id="footer"></div>
+</div>
 </body>
 </html>
