@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 @Slf4j
 @Controller
 @AllArgsConstructor
-public class hyeokController {
+public class HyeokController {
 
     private MemberService memberService;
 
