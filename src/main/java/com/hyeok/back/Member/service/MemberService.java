@@ -24,14 +24,15 @@ public class MemberService {
 
     /* 회원가입 */
     @Transactional
-    public void saveJoin(Member member) {
+    public Boolean saveJoin(Member member) {
         MemberEntity result = selectMember(member.getUserId());
         //id 조회
         if(result.getUserId().equals(member.getUserId())) {
-            return; //ID 중복.
+            return false; //ID 중복.
         }
         member.setPassword(encryption(member.getPassword()));
         memberRepository.save(member.toEntity());
+        return true;
     }
 
     /* 로그인 */

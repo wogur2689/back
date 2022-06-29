@@ -20,14 +20,15 @@ public class HyeokController {
     @PostMapping(path = "/login", consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
     public String memberLogin(LoginReq loginReq) {
         if(memberService.selectJoin(loginReq.getUserId(), loginReq.getPassword()))
-            return "redirect:/";
-        return "redirect:/member/loginError";
+            return "success";
+        return "fail";
     }
 
     //회원가입
     @PostMapping(path = "/signup", consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
     public String memberJoin(SignUpReq signUpReq) {
-        memberService.saveJoin(signUpReq.getMember());
-        return "redirect:/";
+        if(memberService.saveJoin(signUpReq.getMember()))
+            return "success";
+        return "fail";
     }
 }
