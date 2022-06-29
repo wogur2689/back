@@ -3,22 +3,19 @@ package com.hyeok.back.Member.service;
 import com.hyeok.back.Member.Entity.MemberEntity;
 import com.hyeok.back.Member.dto.Member;
 import com.hyeok.back.Member.repository.MemberRepository;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 @Slf4j
 @Service
+@RequiredArgsConstructor
 public class MemberService {
 
-    @Autowired
-    private MemberRepository memberRepository;
-    @Autowired
-    private PasswordEncoder passwordEncoder;
+    private final MemberRepository memberRepository;
+    private final PasswordEncoder passwordEncoder;
 
     /* 비밀번호 암호화 */
     public String encryption(String password) {
@@ -28,6 +25,11 @@ public class MemberService {
     /* 회원가입 */
     @Transactional
     public void saveJoin(Member member) {
+        MemberEntity result = selectMember(member.getUserId());
+        //id 조회
+        if(result.getUserId().equals(member.getUserId())) {
+            return; //ID 중복.
+        }
         member.setPassword(encryption(member.getPassword()));
         memberRepository.save(member.toEntity());
     }
@@ -43,7 +45,7 @@ public class MemberService {
         }
 
         //pw 조회
-        if (!passwordEncoder.matches(pw, result.getPassword())) {
+        if(!passwordEncoder.matches(pw, result.getPassword())) {
              return false; //비밀번호 불일치
         }
 
