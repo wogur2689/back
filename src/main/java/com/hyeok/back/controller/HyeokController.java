@@ -3,17 +3,18 @@ package com.hyeok.back.controller;
 import com.hyeok.back.Member.param.LoginReq;
 import com.hyeok.back.Member.param.SignUpReq;
 import com.hyeok.back.Member.service.MemberService;
-import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.annotation.Resource;
+
 @Slf4j
 @RestController
-@AllArgsConstructor
 public class HyeokController {
 
+    @Resource
     private MemberService memberService;
 
     //로그인
