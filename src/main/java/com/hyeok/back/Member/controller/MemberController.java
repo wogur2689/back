@@ -8,10 +8,12 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @Tag(name = "로그인 / 회원가입")
-@RestController("/member/api")
+@RestController
+@RequestMapping(path = "/member/api")
 @RequiredArgsConstructor
 public class MemberController {
 
@@ -21,15 +23,15 @@ public class MemberController {
     @Operation(summary = "로그인", description = "아이디, 비밀번호 입력")
     @PostMapping(path = "/login", consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
     public String memberLogin(LoginReq loginReq) {
-        if(memberService.selectJoin(loginReq.getUserId(), loginReq.getPassword())) return "redirect:/";
-        else return "redirect:/member/loginError";
+        if(memberService.selectJoin(loginReq.getUserId(), loginReq.getPassword())) return "success";
+        else return "fail";
     }
 
     //회원가입
     @Operation(summary = "회원가입", description = "아이디, 비밀번호, 이름 입력")
     @PostMapping(path = "/signup", consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
     public String memberJoin(SignUpReq signUpReq) {
-        memberService.saveJoin(signUpReq.getMember());
-        return "redirect:/";
+        if(memberService.saveJoin(signUpReq.getMember())) return "success";
+        return "fail";
     }
 }
