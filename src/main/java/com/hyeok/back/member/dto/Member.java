@@ -1,6 +1,6 @@
-package com.hyeok.back.Member.dto;
+package com.hyeok.back.member.dto;
 
-import com.hyeok.back.Member.Entity.MemberEntity;
+import com.hyeok.back.member.entity.MemberEntity;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;

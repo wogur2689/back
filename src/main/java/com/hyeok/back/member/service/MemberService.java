@@ -1,13 +1,16 @@
-package com.hyeok.back.Member.service;
+package com.hyeok.back.member.service;
 
-import com.hyeok.back.Member.Entity.MemberEntity;
-import com.hyeok.back.Member.dto.Member;
-import com.hyeok.back.Member.repository.MemberRepository;
+import com.hyeok.back.member.entity.MemberEntity;
+import com.hyeok.back.member.dto.Member;
+import com.hyeok.back.member.param.SignUpReq;
+import com.hyeok.back.member.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.Optional;
 
 @Slf4j
 @Service
@@ -24,13 +27,16 @@ public class MemberService {
 
     /* 회원가입 */
     @Transactional
-    public Boolean saveJoin(Member member) {
-        MemberEntity result = selectMember(member.getUserId());
-        //id 조회
-        if(result.getUserId().equals(member.getUserId())) {
+    public Boolean saveJoin(SignUpReq req) {
+        Optional<MemberEntity> result = Optional.ofNullable(selectMember(req.getUserId()));
+        if(result.isPresent()) {
             return false; //ID 중복.
         }
-        member.setPassword(encryption(member.getPassword()));
+        Member member = Member.builder()
+                .userId(req.getUserId())
+                .name(req.getName())
+                .password(encryption(req.getPassword()))
+                .build();
         memberRepository.save(member.toEntity());
         return true;
     }
@@ -38,15 +44,15 @@ public class MemberService {
     /* 로그인 */
     @Transactional
     public Boolean selectJoin(String id, String pw) {
-        MemberEntity result = selectMember(id);
+        Optional<MemberEntity> result = Optional.ofNullable(selectMember(id));
 
         //id 조회
-        if(!result.getUserId().equals(id)) {
+        if(result.isEmpty()) {
             return false; //id 없음.
         }
 
         //pw 조회
-        if(!passwordEncoder.matches(pw, result.getPassword())) {
+        if(!passwordEncoder.matches(pw, result.get().getPassword())) {
              return false; //비밀번호 불일치
         }
 

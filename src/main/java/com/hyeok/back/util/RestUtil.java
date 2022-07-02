@@ -1,8 +1,6 @@
 package com.hyeok.back.util;
 
-import com.hyeok.back.Member.dto.Member;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponentsBuilder;
 
@@ -26,11 +24,9 @@ public class RestUtil {
                 .toUri();
         log.info("uri : {}", uri);
 
-        Member member = Member.builder().build();
-
-        ResponseEntity<Member> response = restTemplate.postForEntity(uri, member, Member.class);
-        log.info("{}",response.getStatusCode());
-        log.info("{}",response.getHeaders());
-        log.info("{}",response.getBody());
+        //ResponseEntity<Member> response = restTemplate.postForEntity(uri, member, Member.class);
+        //log.info("{}",response.getStatusCode());
+        //log.info("{}",response.getHeaders());
+        //log.info("{}",response.getBody());
     }
 }

@@ -1,17 +1,19 @@
-package com.hyeok.back.Member.param;
+package com.hyeok.back.member.param;
 
 import com.fasterxml.jackson.databind.PropertyNamingStrategy;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;
-import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
-@Data
+@Setter
+@Getter
 @JsonNaming(PropertyNamingStrategy.SnakeCaseStrategy.class)
-public class LoginReq {
+public class SignUpReq {
+
     /**
-     * 로그인
-     * @param Id
-     * @param password
+     * 회원가입
      */
     private String userId;
+    private String name;
     private String password;
 }

@@ -1,13 +1,15 @@
-package com.hyeok.back.Member.Entity;
+package com.hyeok.back.member.entity;
 
-import lombok.AccessLevel;
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 
-@NoArgsConstructor(access = AccessLevel.PROTECTED)
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
 @Getter
 @Entity
 @Table(name = "member")
@@ -31,14 +33,5 @@ public class MemberEntity {
     @PostLoad
     public void postLoad() {
         this.verify_password = password;
-    }
-
-    @Builder
-    public MemberEntity(Long id, String userId, String name, String password, String verify_password) {
-        this.id = id;
-        this.userId = userId;
-        this.name = name;
-        this.password = password;
-        this.verify_password = verify_password;
     }
 }
