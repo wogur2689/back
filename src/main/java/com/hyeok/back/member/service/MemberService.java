@@ -36,6 +36,8 @@ public class MemberService {
                 .userId(req.getUserId())
                 .name(req.getName())
                 .password(encryption(req.getPassword()))
+                .address(req.getAddress())
+                .phoneNumber(req.getPhoneNumber())
                 .build();
         memberRepository.save(member.toEntity());
         return true;

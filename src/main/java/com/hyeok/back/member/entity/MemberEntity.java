@@ -27,6 +27,12 @@ public class MemberEntity {
     @Column(name = "password")
     private String password;
 
+    @Column(name = "address")
+    private String address;
+
+    @Column(name = "phone_number")
+    private String phoneNumber;
+
     @Transient
     private String verify_password;
 
