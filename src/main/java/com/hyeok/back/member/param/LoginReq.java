@@ -9,7 +9,7 @@ import lombok.Data;
 public class LoginReq {
     /**
      * 로그인
-     * @param Id
+     * @param userId
      * @param password
      */
     private String userId;

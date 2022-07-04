@@ -20,7 +20,7 @@ import javax.annotation.Resource;
 @Tag(name = "로그인 / 회원가입")
 @Slf4j
 @RestController
-@RequestMapping(path = "/member/api")
+@RequestMapping(path = "/member")
 public class HyeokController {
 
     @Resource
