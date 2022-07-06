@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 
+@CrossOrigin(origins="*", allowedHeaders = "*")
 @Tag(name = "로그인 / 회원가입")
 @Slf4j
 @RestController
@@ -26,7 +27,6 @@ public class HyeokController {
     @Operation(summary = "로그인", description = "아이디, 비밀번호 입력")
     @PostMapping(path = "/login")
     public HyeokApi memberLogin(@RequestBody LoginReq loginReq) {
-        log.info("요청값 : {}", loginReq);
         if(memberService.selectJoin(loginReq.getUserId(), loginReq.getPassword())) {
             log.info(ApiCode.API_0000.getMsg());
             return new HyeokApi(new CommonResult(ApiCode.API_0000.getCode(), ApiCode.API_0000.getMsg()));
@@ -41,7 +41,6 @@ public class HyeokController {
     @Operation(summary = "회원가입", description = "아이디, 비밀번호, 이름 입력")
     @PostMapping(path = "/signup")
     public HyeokApi memberJoin(@RequestBody SignUpReq signUpReq) {
-        log.info("요청값 : {}", signUpReq);
         if(memberService.saveJoin(signUpReq)) {
             log.info(ApiCode.API_0000.getMsg());
             return new HyeokApi(new CommonResult(ApiCode.API_0000.getCode(), ApiCode.API_0000.getMsg()));
