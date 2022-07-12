@@ -66,5 +66,23 @@ public class BoardService {
             return BoardRepository.heartCountDown(heartReq.getId());
     }
 
+    /* 작성한 게시물 읽기 */
+    @Transactional(readOnly = true)
+    public Board getBoard(Long id) {
+        Optional<BoardEntity> boardDetail = boardRepository.findById(id);
+        BoardEntity boardEntity = boardDetail.get();
+
+        Board board = Board.builder()
+                .id(boardEntity.getId())
+                .writer(boardEntity.getWriter())
+                .title(boardEntity.getTitle())
+                .content(boardEntity.getContent())
+                .heart(boardEntity.getHeart())
+                .fileName(boardEntity.getFileName())
+                .filePath(boardEntity.getFilePath())
+                .build();
+
+        return board;
+    }
 
 }
