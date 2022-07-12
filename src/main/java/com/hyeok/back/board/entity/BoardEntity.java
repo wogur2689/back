@@ -26,14 +26,14 @@ public class BoardEntity extends TimeEntity {
     private String title; //제목
 
     @Column(name = "heart")
-    private String heart; //좋아요
+    private Integer heart; //좋아요
 
     @Column(columnDefinition = "TEXT", nullable = false)
     private String content; //내용
 
-    @Column(name = "file_path")
+    @Column(name = "file_path", length = 100)
     private String filePath; //파일경로
 
-    @Column(name = "file_name")
+    @Column(name = "file_name", length = 100)
     private String fileName; //파일명
 }

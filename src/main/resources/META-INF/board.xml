@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<entity-mappings xmlns="http://java.sun.com/xml/ns/persistence/orm"
+                 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                 xsi:schemaLocation="http://java.sun.com/xml/ns/persistence/orm http://java.sun.com/xml/ns/persistence/orm_2_0.xsd"
+                 version="2.0">
+
+    <!-- 좋아요 클릭시 게시글 좋아요 증가 -->
+    <named-native-query name="board.heartCountUp">
+        <query>
+            update board
+            set heart = heart + 1
+            where id in (select id
+                         from board
+                         where id = :boardId)
+        </query>
+    </named-native-query>
+
+    <!-- 좋아요 취소할시 게시글 좋아요 감소 -->
+    <named-native-query name="board.heartCountDown">
+        <query>
+            update board
+            set heart = CASE WHEN heart = 0 THEN 0 ELSE heart - 1
+            where id in (select id
+                         from board
+                         where id = :boardId)
+        </query>
+    </named-native-query>
+
+</entity-mappings>
