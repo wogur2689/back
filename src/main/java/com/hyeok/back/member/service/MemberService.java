@@ -28,13 +28,15 @@ public class MemberService {
     /* 회원가입 */
     @Transactional
     public Boolean saveJoin(SignUpReq req) {
-        Optional<MemberEntity> result = Optional.ofNullable(selectMember(req.getUserId()));
-        if(result.isPresent()) {
-            return false; //ID 중복.
+        Optional<MemberEntity> resultID = Optional.ofNullable(findByUserId(req.getUserId()));
+        Optional<MemberEntity> resultNickName = Optional.ofNullable(findByNickName(req.getNickName()));
+        if(resultID.isPresent() || resultNickName.isPresent()) {
+            return false; //ID또는 닉네임 중복.
         }
         Member member = Member.builder()
                 .userId(req.getUserId())
                 .name(req.getName())
+                .nickName(req.getNickName())
                 .password(encryption(req.getPassword()))
                 .address(req.getAddress())
                 .phoneNumber(req.getPhoneNumber())
@@ -46,7 +48,7 @@ public class MemberService {
     /* 로그인 */
     @Transactional
     public Boolean selectJoin(String id, String pw) {
-        Optional<MemberEntity> result = Optional.ofNullable(selectMember(id));
+        Optional<MemberEntity> result = Optional.ofNullable(findByUserId(id));
 
         //id 조회
         if(result.isEmpty()) {
@@ -63,7 +65,13 @@ public class MemberService {
 
     /* 입력한 ID로 조회 */
     @Transactional(readOnly = true)
-    public MemberEntity selectMember(String id) {
+    public MemberEntity findByUserId(String id) {
         return memberRepository.findByUserId(id);
+    }
+
+    /* 입력한 닉네임으로 조회 */
+    @Transactional(readOnly = true)
+    public MemberEntity findByNickName(String nickName) {
+        return memberRepository.findByNickName(nickName);
     }
 }

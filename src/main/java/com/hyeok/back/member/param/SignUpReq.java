@@ -15,6 +15,7 @@ public class SignUpReq {
      */
     private String userId;
     private String name;
+    private String nickName;
     private String password;
     private String address;
     private String phoneNumber;
