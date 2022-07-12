@@ -1,0 +1,43 @@
+package com.hyeok.back.board.dto;
+
+import com.hyeok.back.board.entity.BoardEntity;
+import com.hyeok.back.member.entity.MemberEntity;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.Setter;
+
+@Setter
+@Getter
+public class Board {
+    private Long id;          //아이디
+    private String writer;    //작성자
+    private String title;     //제목
+    private String content;   //컨텐츠
+    private String filePath;  //파일경로
+    private String fileName;  //파일명
+    private String createdAt; //작성일시
+    private String updatedAt; //수정일시
+
+    public BoardEntity toEntity() {
+        return BoardEntity.builder()
+                .id(id)
+                .writer(writer)
+                .title(title)
+                .content(content)
+                .filePath(filePath)
+                .fileName(fileName)
+                .build();
+    }
+
+    @Builder
+    public Board(Long id, String writer, String title, String content, String filePath, String fileName, String createdAt, String updatedAt) {
+        this.id = id;
+        this.writer = writer;
+        this.title = title;
+        this.content = content;
+        this.filePath = filePath;
+        this.fileName = fileName;
+        this.createdAt = createdAt;
+        this.updatedAt = updatedAt;
+    }
+}
