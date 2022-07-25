@@ -1,6 +1,6 @@
 # hyeok-back
-Back-end
+project : Back-end
 
-Spring Boot + JPA
+Skil : Spring Boot + JPA
 
-RestFul Project
+subject : RestFul Project
