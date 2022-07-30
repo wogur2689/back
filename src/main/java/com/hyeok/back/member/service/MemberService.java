@@ -1,5 +1,7 @@
 package com.hyeok.back.member.service;
 
+import com.hyeok.back.enums.ApiCode;
+import com.hyeok.back.hyeokException.HyeokException;
 import com.hyeok.back.member.entity.MemberEntity;
 import com.hyeok.back.member.dto.Member;
 import com.hyeok.back.member.param.SignUpReq;
@@ -52,12 +54,12 @@ public class MemberService {
 
         //id 조회
         if(result.isEmpty()) {
-            return false; //id 없음.
+            throw new HyeokException(ApiCode.API_2000); //id 없음.
         }
 
         //pw 조회
         if(!passwordEncoder.matches(pw, result.get().getPassword())) {
-             return false; //비밀번호 불일치
+             throw new HyeokException(ApiCode.API_2001); //비밀번호 불일치
         }
 
         return true; //로그인 성공

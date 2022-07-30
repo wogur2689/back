@@ -23,7 +23,7 @@ public class HyeokExceptionHandler {
      */
     @ExceptionHandler({HttpMessageNotReadableException.class, IllegalArgumentException.class})
     public HyeokApi httpMessageNotReadableException() {
-        return ApiUtil.getMsg(ApiCode.API_2000);
+        return ApiUtil.getMsg(ApiCode.API_1001);
     }
 
     /**
@@ -31,6 +31,6 @@ public class HyeokExceptionHandler {
      */
     @ExceptionHandler({Exception.class})
     public HyeokApi exception() {
-        return ApiUtil.getMsg(ApiCode.API_5000);
+        return ApiUtil.getMsg(ApiCode.API_9999);
     }
 }

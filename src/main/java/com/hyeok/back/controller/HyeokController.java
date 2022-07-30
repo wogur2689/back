@@ -1,6 +1,5 @@
 package com.hyeok.back.controller;
 
-import com.hyeok.back.board.heartEnum.HeartType;
 import com.hyeok.back.board.param.HeartReq;
 import com.hyeok.back.board.param.WriteReq;
 import com.hyeok.back.board.service.BoardService;
@@ -40,8 +39,8 @@ public class HyeokController {
             return new HyeokApi(new CommonResult(ApiCode.API_0000.getCode(), ApiCode.API_0000.getMsg()));
         }
         else {
-            log.error(ApiCode.API_5000.getMsg());
-            throw new HyeokException(ApiCode.API_5000);
+            log.error(ApiCode.API_9999.getMsg());
+            throw new HyeokException(ApiCode.API_9999);
         }
     }
 
@@ -54,8 +53,8 @@ public class HyeokController {
             return new HyeokApi(new CommonResult(ApiCode.API_0000.getCode(), ApiCode.API_0000.getMsg()));
         }
         else {
-            log.error(ApiCode.API_5000.getMsg());
-            throw new HyeokException(ApiCode.API_5000);
+            log.error(ApiCode.API_9999.getMsg());
+            throw new HyeokException(ApiCode.API_9999);
         }
     }
 
@@ -68,8 +67,8 @@ public class HyeokController {
             return new HyeokApi(new CommonResult(ApiCode.API_0000.getCode(), ApiCode.API_0000.getMsg()));
         }
         else {
-            log.error(ApiCode.API_5000.getMsg());
-            return new HyeokApi(new CommonResult(ApiCode.API_5000.getCode(), ApiCode.API_5000.getMsg()));
+            log.error(ApiCode.API_9999.getMsg());
+            return new HyeokApi(new CommonResult(ApiCode.API_9999.getCode(), ApiCode.API_9999.getMsg()));
         }
     }
     //게시물 반환
@@ -86,10 +85,10 @@ public class HyeokController {
     public HyeokApi heartControl(@RequestBody HeartReq heartReq) {
         if(boardService.heartControl(heartReq)) {
             log.info(ApiCode.API_0000.getMsg());
-            return new HyeokApi(new CommonResult(ApiCode.API_1000.getCode(), ApiCode.API_0000.getMsg()));
+            return new HyeokApi(new CommonResult(ApiCode.API_0000.getCode(), ApiCode.API_0000.getMsg()));
         } else {
-            log.error(ApiCode.API_5000.getMsg());
-            return new HyeokApi(new CommonResult(ApiCode.API_5000.getCode(), ApiCode.API_5000.getMsg()));
+            log.error(ApiCode.API_9999.getMsg());
+            return new HyeokApi(new CommonResult(ApiCode.API_9999.getCode(), ApiCode.API_9999.getMsg()));
         }
     }
 }
